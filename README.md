@@ -39,7 +39,8 @@ Now, how can this be achieved in practice?
 
 The agent has a set of possible actions it can take at every turn. Consider the board state below:
 
-![X_turn](https://user-images.githubusercontent.com/85884720/123281669-2a3d9400-d50a-11eb-8b42-4552311ec2ea.png "Player Xs turn")
+![xs_turn](https://user-images.githubusercontent.com/85884720/123285509-64f4fb80-d50d-11eb-84d7-acc189e61b69.png "It's player Xs turn")
+
 
 It's Xs turn and he has five possible fields where to put his sign. However, if he does not put the X in the top left corner, player O has won.
 So there are better and worse turns, but how does the agent know the utility of a turn? A way to do this is by keeping a table with a value for
