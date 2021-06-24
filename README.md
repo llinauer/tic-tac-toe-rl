@@ -91,7 +91,7 @@ Run:
 
 `python tic_tac_toe.py --play`
 
-You are the X player and you will go first. Depending on the number of games you let the agent train, it may surprise you how good it actually can play. However,  don't expect too much from it. Just experiment with it a little and let it win sometimes, so it won't get discouraged (JK).
+You are the X player and you will go first. Depending on the number of games you let the agent train, it may surprise you how good it actually can play. However,  don't expect too much from it. Just experiment with it a little and let it win sometimes, so it won't get discouraged (jk).
 
 Have fun!
 
