@@ -2,39 +2,28 @@
 
 This project was heavily (not to say, solely) influenced by this blog entry: https://towardsdatascience.com/reinforcement-learning-implement-tictactoe-189582bea542
 of Jeremy Zhang. The original code can be found here: https://github.com/MJeremy2017/reinforcement-learning-implementation/tree/master/TicTacToe
-So please give credit to him.
 
-What I wanted to achieve with this project is:
+The main reason I wanted to re-create Jeremy's project was to be able to understand step-by-step what is going on in the code. In the process, I decided to add my own touch to it and wrote a little GUI with tkinter. Here and there I changed the code so that it better fits my style. 
 
-1) Re-create it and learn
-2) Add my own touch to it
-3) Create a tutorial in german, for all my german-speaking fellows (the german version is currently in development).
-
-So there you have it. Now, let's get started.
+However, overall I stayed close to the original project so please give credit to Jeremy and check out his blog post for an in-depth view on what is going on.
 
 # Pre-requisites
 
-This project uses python 3 and the following modules:
-* tkinter
-* pickle
-* numpy
-* game
+This project uses python3 with numpy. So please make sure you have numpy installed and then you are ready to go.
 
-Please make sure that you have installed all the pre-requisites before running.
 
 # Tic Tac Toe with Reinformcement Learning
 
-Before you can start, let me give you a quick introduction in Reinforcement Learning. The emphasis is on quick. This shall serve merely as a high-level overview and will not go into mathematical detail.
-If you are interested in the (very awesome) topic of Reinforcement Learning, I suggest you look into this book Reinforcement Learning: An Introduction by Richard Sutton and Andrew Barto
+But before you start, let me give you a (very) brief introduction in Reinforcement Learning. This shall serve merely as a high-level overview and will not go into mathematical detail.
+If you are interested in the (awesome) topic of Reinforcement Learning, I suggest you look into this book Reinforcement Learning: An Introduction by Richard Sutton and Andrew Barto
 At the time of writing, the book is available for free at: http://incompleteideas.net/book/the-book.html
 
-Tic Tac Toe is a very easy game. Very very easy. That's why it is well suited for an implementation with Reinforcement Learning.
-Reinforcement Learning is a subfield of Machine Learning, where an agent learns to take actions in an environment by interacting with it and 
-receiving rewards. So far for the definition.
+Reinforcement Learning is a subfield of Machine Learning, where an agent learns to take actions in an environment by interacting with it and receiving rewards. So far for the definition.
 
-How can we picture this in the case of Tic Tac Toe?
-The agent (player) can take actions (draw Xs and Os) in the environment (the board). It receives a reward for winning the game and gets a penalty (= negative reward) for loosing. A draw will result in a small yet non-zero reward, since the agent did some things right and at least not loose.
+How can we picture this in the case of Tic Tac Toe (or Noghts and Crosses)?
+The agent (player) can take actions (draw Xs and Os) in the environment (the board). It receives a reward for winning the game and gets a penalty (= negative reward) for loosing. A draw will result in a small yet non-zero reward, since the agent did some things right and at least did not loose.
 The agent wants to maximize its reward and will therefore take actions that will lead it to a win or if not possible, at least a draw.
+
 Now, how can this be achieved in practice? 
 
 The agent has a set of possible actions it can take at every turn. Consider the board state below:
@@ -42,13 +31,19 @@ The agent has a set of possible actions it can take at every turn. Consider the 
 ![xs_turn](https://user-images.githubusercontent.com/85884720/123285509-64f4fb80-d50d-11eb-84d7-acc189e61b69.png "It's player Xs turn")
 
 
-It's Xs turn and he has five possible fields where to put his sign. However, if he does not put the X in the top left corner, player O has won.
-So there are better and worse turns, but how does the agent know the utility of a turn? A way to do this is by keeping a table with a value for
-each possible game configuration. If the agent has such a table, than it simply chooses the action that leads to the state with the highest value.
-We can construct this lookup table by making use of Reinforcement Learning.
+It's agent Xs turn and it has five possible fields where to put the sign. However, if it does not put the X in the top left corner, player O has won.
+So there are better and worse actions, but how does the agent know which are which? A way to do this is by keeping a table with a value for each possible game configuration. If the agent has such a table, than it simply chooses the action that leads to the state with the highest value.
+This table is a special case of a state-action value function (or Q-function). A Q-function gives the value of performing an action in a particular state. By executing the action with the highest value for a given state, the agent maximizes its chances of achieving a goal (in this case, winning).
 
-Before the learning process, we fill up the table with zeros. This represents the total lack of knowledge of the individual configurations utilities.
-Start of the first game. Player X starts and puts his X somewhere on the board. The agents turn. It has eight possible actions to take corresponding to the eight remaining fields. However, since every action leads to a configuration with value 0 (remember, all board configurations in the lookup table are assigned a zero as of yet), so the best it can do is choose an action randomly. The agent thus puts its sign in one of the remaining eight fields at random, but it remembers where. The same situation will appear at the agents next turn. As the game progresses, the random acting agent won't stand much chance against an even minimally talented Tic Tac Toe player and so it looses and receives a negative reward. 
+The process of learning a Q-function is called Q-learning.
+Q-functions can be arbitrarily complex and need not be represantable by a table. In fact the table approach is intractable for environments with a large number of states.
+For Tic Tac Toe however, a Q-table will do just fine. 
+
+But how can the agent learn the entries of the table? Consider a game against a human player (X in this case).
+
+Initially, the table is filled with zeros. Every action in every state is equally viable since the agent just does not know better.
+
+Start of the first game. Player X starts and puts an X somewhere on the board. The agents turn. It has eight possible actions to take. However, since every action leads to a configuration with value 0, the best it can do is choose an action randomly. The agent thus puts its sign in one of the remaining eight fields at random, but it remembers where. The same situation will appear at the agents next turn. As the game progresses, the random acting agent won't stand much chance against an even minimally talented Tic Tac Toe player and so it looses and receives a negative reward. 
 
 Now comes the crucial part. The agent can learn from this frustrating experience of losing, by decreasing the value of those configurations, that lead to the loss. It remembered all actions it took during the course of the game and all board configurations that resulted from those actions. The agent goes through all the configurations in reverse order and updates their values according to the formula:
 
@@ -61,7 +56,7 @@ The new value of a board configuration is equal to the old value plus the differ
 ![update_after_loss](https://user-images.githubusercontent.com/85884720/123281736-37f31980-d50a-11eb-8913-b67c36597d1b.png "The agent updates the values for the board states it experienced during the game")
 
 The agent has lost the game and receives a negative reward. It fetches the last board configuration from the list and calculates the new value according to the formula. The only thing here is, there is no following configuration to the last configuration. So instead, it uses the reward as the value V(next config). Then, it takes the second to last board configuration and calculates its new value. Here V(next config) is the updated value of the last board configuration.
-And so on and so forth. All the board configurations the agent saw in during that game, will now have updated values. And since the game was lost, the values have decreased. In following games, actions that will lead to these configurations will less likely be chosen, since the values are now actually less than zero.
+And so on and so forth. All the board configurations the agent saw during that game will now have updated values. And since the game was lost, the values have decreased. In following games, actions that will lead to these configurations will less likely be chosen, since the values are now actually less than zero.
 
 The exact same would happen if the agent wins a game. The only difference is that the reward is now positive and the values of board configurations that lead to the win will be increased. In the case of a draw, the reward is positive yet small, so the values will only change slightly.
 
@@ -95,7 +90,6 @@ You are the X player and you will go first. Depending on the number of games you
 
 Have fun!
 
-# German version in the making
 
 
 
