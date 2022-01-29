@@ -91,7 +91,7 @@ You are the X player and you will go first. Depending on the number of games you
 Have fun!
 
 
-# Example
+# Showcasing
 
 Here are some examples of games I have played against agents of various strength.
 
