@@ -109,8 +109,8 @@ After 5000 rounds, the agents performance has improved quite a bit. After the fi
 Perhaps you can attribute this to my skills, but the agent now seems to "know" where to place its marks.
 But maybe we still can do better.
 
+![5k_rounds](https://user-images.githubusercontent.com/85884720/151670357-df6eadf3-dbaf-4b81-9450-7bc4b701065d.gif)
 
-https://user-images.githubusercontent.com/85884720/151670287-d15c177d-6954-4516-9cad-e2ebeebce6cf.mp4
 
 
 ## 50k rounds of training
@@ -119,7 +119,7 @@ The first two games looked promising. The agent knows how to counter all my cunn
 But then it fell for this cheesy mid-field start. Come on, you can do better than that.
 Still a little more training.
 
-https://user-images.githubusercontent.com/85884720/151670291-81c5bcfd-1540-41e0-a8ba-2b4a3a48f941.mp4
+![50k_rounds](https://user-images.githubusercontent.com/85884720/151670395-091cf6dc-51c0-49f3-ad8c-427e79dfdb82.gif)
 
 
 ## 200k rounds of training
@@ -128,7 +128,6 @@ Finally, after 200 thousand rounds of training (which btw took around 20 minutes
 It also found a counter to the mid-field start strategy. Chapeau!
 
 
-https://user-images.githubusercontent.com/85884720/151670295-c087e64e-119c-45c0-bf64-dd6b69a6c46b.mp4
-
+![200k_rounds](https://user-images.githubusercontent.com/85884720/151670400-e53009a5-d323-47fe-b182-675577ebd40a.gif)
 
 
