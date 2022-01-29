@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 tic_tac_toe.py
 Author: Lukas Linauer
@@ -6,12 +7,14 @@ Main module, parses command line arguments and sets up game
 
 """
 
+import sys
 import argparse
 from game import Game
 
 
 def main():
     """Main function"""
+
 
     # parse arguments
     parser = argparse.ArgumentParser(description='Train an Reinforcement Learning agent in Tic '
@@ -22,7 +25,9 @@ def main():
                         default=100)
     args = parser.parse_args()
 
-
+    if len(sys.argv) == 1:
+        parser.print_help(sys.stderr)
+    
     # check if an action was given
     if 'action' not in args:
         print('Please provide a valid action. Valid actions are: train, play')
