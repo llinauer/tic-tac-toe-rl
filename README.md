@@ -71,7 +71,7 @@ Feel free to tweak the parameters and see if you can improve the learning.
 
 You can train the Tic Tac Toe agent by running:
 
-`python tic_tac_toe.py --train --n <number>`
+`python tic_tac_toe.py --action train --n <number>`
 
 
 The agent will play `<number>` games against itself, updating the values of board configurations as explained above and save the results in two files called policy_X and policy_O. These are the lookup tables for players X and O stored (pickled) as binary files.
@@ -84,12 +84,51 @@ Be sure to test the training with a lower `<number>` (e.g. 100) before really pu
 You can now test the intelligence of the agent by actually playing against it.
 Run: 
 
-`python tic_tac_toe.py --play`
+`python tic_tac_toe.py --action play`
 
 You are the X player and you will go first. Depending on the number of games you let the agent train, it may surprise you how good it actually can play. However,  don't expect too much from it. Just experiment with it a little and let it win sometimes, so it won't get discouraged (jk).
 
 Have fun!
 
+
+# Example
+
+Here are some examples of games I have played against agents of various strength.
+
+## 10 rounds of training
+
+With mere 10 rounds of training, the agents performnce is pretty lousy. 3:0
+It definetly needs some more training.
+
+![100_rounds](https://user-images.githubusercontent.com/85884720/151670282-6ea2241a-68ac-421f-bf99-821b5d4176cb.gif)
+
+
+## 5000 rounds of training
+
+After 5000 rounds, the agents performance has improved quite a bit. After the first win, it pulled of two draws.
+Perhaps you can attribute this to my skills, but the agent now seems to "know" where to place its marks.
+But maybe we still can do better.
+
+
+https://user-images.githubusercontent.com/85884720/151670287-d15c177d-6954-4516-9cad-e2ebeebce6cf.mp4
+
+
+## 50k rounds of training
+
+The first two games looked promising. The agent knows how to counter all my cunning strategies and is able to force two draws.
+But then it fell for this cheesy mid-field start. Come on, you can do better than that.
+Still a little more training.
+
+https://user-images.githubusercontent.com/85884720/151670291-81c5bcfd-1540-41e0-a8ba-2b4a3a48f941.mp4
+
+
+## 200k rounds of training
+
+Finally, after 200 thousand rounds of training (which btw took around 20 minutes on my machine), I cannot beat the agent anymore.
+It also found a counter to the mid-field start strategy. Chapeau!
+
+
+https://user-images.githubusercontent.com/85884720/151670295-c087e64e-119c-45c0-bf64-dd6b69a6c46b.mp4
 
 
 
